@@ -12,22 +12,34 @@ env = SConscript("../godot-cpp/SConstruct")
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
 
-def library_name(name):
-    if env["platform"] == "macos":
-        return "./bin/lib{}.{}.{}.framework/lib{}.{}.{}".format(
-            name, env["platform"], env["target"], name, env["platform"], env["target"]
-        )
-    else:
-        return "./bin/lib{}.{}.{}.{}{}".format(
-            name, env["platform"], env["target"], env["arch_suffix"], env["SHLIBSUFFIX"]
-        )
-
-env.Append(CPPPATH=["src/", "../"])
+env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
-library = env.SharedLibrary(
-    library_name("gdif"),
-    source=sources
-)
+addon_path = "."
+project_name = "gdif"
+
+debug_or_release = "release" if env["target"] == "template_release" else "debug"
+if env["platform"] == "macos":
+    library = env.SharedLibrary(
+        "{0}/bin/lib{1}.{2}.{3}.framework/{1}.{2}.{3}".format(
+            addon_path,
+            project_name,
+            env["platform"],
+            debug_or_release,
+        ),
+        source=sources,
+    )
+else:
+    library = env.SharedLibrary(
+        "{}/bin/lib{}.{}.{}.{}{}".format(
+            addon_path,
+            project_name,
+            env["platform"],
+            debug_or_release,
+            env["arch"],
+            env["SHLIBSUFFIX"],
+        ),
+        source=sources,
+    )
 
 Default(library)

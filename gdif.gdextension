@@ -6,8 +6,6 @@ entry_symbol = "example_library_init"
 
 macos.debug = "bin/libgdif.macos.debug.framework"
 macos.release = "bin/libgdif.macos.release.framework"
-windows.debug.x86_32 = "bin/libgdif.windows.debug.x86_32.dll"
-windows.release.x86_32 = "bin/libgdif.windows.release.x86_32.dll"
 windows.debug.x86_64 = "bin/libgdif.windows.debug.x86_64.dll"
 windows.release.x86_64 = "bin/libgdif.windows.release.x86_64.dll"
 linux.debug.x86_64 = "bin/libgdif.linux.debug.x86_64.so"
