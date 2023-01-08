@@ -21,12 +21,12 @@ struct hasha
 
 // template <>
 // struct hash<std::tuple<String, String>>
-struct GDN_EXPORT hashb
+struct GDE_EXPORT hashb
 {
     std::size_t operator()(const std::tuple<String, String>& value) const;
 };
 
-class GDN_EXPORT DIContext : public Node2D
+class GDE_EXPORT DIContext : public Node2D
 {
     GDCLASS(DIContext, Node2D);
 

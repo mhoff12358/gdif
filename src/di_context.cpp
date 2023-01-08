@@ -156,7 +156,7 @@ void DIContext::_enter_tree()
 
 void DIContext::_bind_methods()
 {
-    ClassDB::bind_static_method(k_className, D_METHOD("get_nearest", "node"), &DIContext::get_nearest);
+    auto binding = ClassDB::bind_static_method(k_className, D_METHOD("get_nearest", "node"), &DIContext::get_nearest);
 
     ClassDB::bind_method(D_METHOD("get_registered_node", "type"), &DIContext::get_registered_node);
     ClassDB::bind_method(D_METHOD("get_registered_node_with_id", "type", "id"), &DIContext::get_registered_node_with_id);
