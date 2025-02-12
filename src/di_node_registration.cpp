@@ -25,16 +25,20 @@ void DINodeRegistration::_enter_tree()
     {
         to_register = NodePath("..");
     }
-    auto nearest_context = DIContext::get_nearest(this);
-    if (nearest_context == nullptr)
-    {
-        UtilityFunctions::print("DINodeRegistration with no nearest context");
-        return;
-    }
     Node* node_to_register = get_node<Node>(to_register);
     if (node_to_register == nullptr)
     {
         UtilityFunctions::print("DINodeRegistration for non-existent node");
+        return;
+    }
+    auto nearest_context = DIContext::get_nearest(this);
+    if (nearest_context == node_to_register)
+    {
+        nearest_context = DIContext::get_nearest(node_to_register);
+    }
+    if (nearest_context == nullptr)
+    {
+        UtilityFunctions::print("DINodeRegistration with no nearest context");
         return;
     }
     if (_type == "")

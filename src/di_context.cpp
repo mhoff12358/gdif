@@ -67,6 +67,7 @@ void DIContext::register_node_of_type(Object* node, String type, String id)
     {
         UtilityFunctions::print("Double registering a node with type ", type);
     }
+    UtilityFunctions::print("Registering ", type, " with id ", id, " in ", get_name());
     _registered_nodes.insert(existingRegistration, std::make_pair(registration_tuple, node));
 
     if (_parent_context.has_value())
@@ -91,7 +92,11 @@ void DIContext::register_node_of_type(Object* node, String type, String id)
                     {
                         mapped_type = possible_export->get_mapped_type();
                     }
-                    String mapped_id = possible_export->get_mapped_id();
+                    String mapped_id = id;
+                    if (!possible_export->get_mapped_id().is_empty())
+                    {
+                        mapped_id = possible_export->get_mapped_id();
+                    }
                     parent->register_node_of_type(node, mapped_type, mapped_id);
                     return;
                 }
